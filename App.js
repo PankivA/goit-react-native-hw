@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
-import {StyleSheet, Text, View } from 'react-native';
-import RegistrationScreen from './src/Screens/RegistrationScreen';
+import {StyleSheet, View } from 'react-native';
+// import RegistrationScreen from './src/Screens/RegistrationScreen';
 import LoginScreen from './src/Screens/LoginScreen';
-import PostsScreen from './src/Screens/PostsScreen';
+// import PostsScreen from './src/Screens/PostsScreen';
 import { useFonts } from "expo-font";
 
 export default function App() {
@@ -11,15 +11,15 @@ export default function App() {
     'Roboto-Bold': require('./src/fonts/Roboto-Bold.ttf'),
     'Roboto-Medium': require('./src/fonts/Roboto-Medium.ttf'),
   });
-  // if (!fontsLoaded) {
-  //   return null;
-  // }
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
       <View style={styles.page}>
-        {/* <LoginScreen /> */}
+        <LoginScreen />
         {/* <RegistrationScreen /> */}
-        <PostsScreen />
+        {/* <PostsScreen /> */}
       </View>
   );
 }

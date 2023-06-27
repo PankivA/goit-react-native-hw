@@ -11,7 +11,7 @@ import {
   Platform,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { useFonts } from "expo-font";
+// import { useFonts } from "expo-font";
 
 const RegistrationScreen = () => {
   const [focusedInput, setFocusedInput] = useState(null);
@@ -54,7 +54,7 @@ const RegistrationScreen = () => {
 
   return (
     <ImageBackground
-      source={require("../images/bg-app.jpg")}
+      source={require("../images/bg-img.jpg")}
       style={styles.page}
       imageStyle={{
         minHeight: 812,
