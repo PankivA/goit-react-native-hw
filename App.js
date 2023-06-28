@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import {StyleSheet, View } from 'react-native';
 import RegistrationScreen from './src/Screens/RegistrationScreen';
-import LoginScreen from './src/Screens/LoginScreen';
+// import LoginScreen from './src/Screens/LoginScreen';
 import { useFonts } from "expo-font";
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
   return (
       <View style={styles.page}>
         {/* <LoginScreen /> */}
-        {/* <RegistrationScreen /> */}
+        <RegistrationScreen />
       </View>
   );
 }
