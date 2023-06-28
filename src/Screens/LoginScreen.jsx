@@ -7,77 +7,127 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const LoginScreen = () => {
   const [focusedInput, setFocusedInput] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const signIn = (e) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [isEmailEntered, setIsEmailEntered] = useState(false);
+  const [isPasswordEntered, setIsPasswordEntered] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    setIsFormValid(email !== "" && password !== "");
+  }, [email, password]);
+
+  const showHidePassword = (e) => {
     e.preventDefault();
+    setShowPassword(!showPassword);
   };
-  const showPassword = (e) => {
-    e.preventDefault();
+
+  const signIn = () => {
+    if (isFormValid) {
+      setEmail(email);
+      setPassword(password);
+
+      console.log({ Email: email, Password: password });
+
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (
-    <ImageBackground
-      source={require("../images/bg-img.jpg")}
-      style={styles.page}
-      imageStyle={{
-        minHeight: 812,
-      }}
-    >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : null}
-        style={styles.container}
-      >
-        <View style={styles.titleContainer}>
-          <Text style={styles.registrationTitle}>Увійти</Text>
-        </View>
-        <View style={styles.formContainer}>
-          <TextInput
-            style={[
-              [styles.input],
-              focusedInput === "email" && [styles.inputFocused],
-            ]}
-            placeholderTextColor={"#BDBDBD"}
-            placeholder="Адреса електронної пошти"
-            name="email"
-            onFocus={() => setFocusedInput("email")}
-            onBlur={() => setFocusedInput(null)}
-          />
-        </View>
-        <View style={styles.formContainer}>
-          <TextInput
-            style={[
-              [styles.input],
-              focusedInput === "password" && [styles.inputFocused],
-            ]}
-            placeholderTextColor={"#BDBDBD"}
-            secureTextEntry={true}
-            placeholder="Пароль"
-            name="password"
-            onFocus={() => setFocusedInput("password")}
-            onBlur={() => setFocusedInput(null)}
-          />
-          <TouchableOpacity style={styles.buttonShow} onPress={showPassword}>
-            <Text style={styles.buttonShowText}>Показати</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.actions}>
-          <TouchableOpacity style={styles.button} onPress={signIn}>
-            <Text style={styles.buttonText}>Увійти</Text>
-          </TouchableOpacity>
-          <View style={styles.redirection}>
-            <Text style={styles.redirectionText}>Немає акаунту?</Text>
-            <TouchableOpacity>
-              <Text style={styles.redirectionLink}>Зареєструватися</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.page}>
+        <ImageBackground
+          source={require("../images/bg-img.jpg")}
+          style={styles.imageBackground}
+          imageStyle={{
+            minHeight: 812,
+          }}
+        >
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : null}
+            style={styles.container}
+          >
+            <View style={styles.titleContainer}>
+              <Text style={styles.registrationTitle}>Увійти</Text>
+            </View>
+            <View style={styles.formContainer}>
+              <TextInput
+                style={[
+                  [styles.input],
+                  focusedInput === "email" && [styles.inputFocused],
+                ]}
+                placeholderTextColor={"#BDBDBD"}
+                placeholder="Адреса електронної пошти"
+                name="email"
+                value={email}
+                onChangeText={(text) => {
+                  setEmail(text);
+                  setIsEmailEntered(text.trim() !== "");
+                  console.log("Email:", text);
+                }}
+                onFocus={() => setFocusedInput("email")}
+                onBlur={() => setFocusedInput(null)}
+              />
+            </View>
+            <View style={styles.formContainer}>
+              <TextInput
+                style={[
+                  [styles.input],
+                  focusedInput === "password" && [styles.inputFocused],
+                ]}
+                placeholderTextColor={"#BDBDBD"}
+                placeholder="Пароль"
+                name="password"
+                value={password}
+                secureTextEntry={!showPassword}
+                editable={isEmailEntered}
+                onChangeText={(text) => {
+                  setPassword(text);
+                  setIsPasswordEntered(text !== "");
+                  console.log("Password:", text);
+                }}
+                onFocus={() => setFocusedInput("password")}
+                onBlur={() => setFocusedInput(null)}
+              />
+              <TouchableOpacity
+                style={styles.buttonShow}
+                onPress={showHidePassword}
+              >
+                <Text style={styles.buttonShowText}>
+                  {showPassword ? "Приховати" : "Показати"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.actions}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={signIn}
+                disabled={!isFormValid}
+              >
+                <Text style={styles.buttonText}>Увійти</Text>
+              </TouchableOpacity>
+              <View style={styles.redirection}>
+                <Text style={styles.redirectionText}>Немає акаунту?</Text>
+                <TouchableOpacity>
+                  <Text style={styles.redirectionLink}>Зареєструватися</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 export default LoginScreen;
@@ -85,8 +135,11 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    position: "relative",
+  },
+  imageBackground: {
+    flex: 1,
     objectFit: "none",
+    position: "relative",
   },
   container: {
     position: "absolute",
@@ -113,7 +166,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
-    color: "#BDBDBD",
+    color: "#212121",
     backgroundColor: "#F6F6F6",
     borderWidth: 1,
     borderStyle: "solid",
