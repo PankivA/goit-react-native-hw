@@ -14,7 +14,7 @@ import {
 import React, { useState, useEffect } from "react";
 // import { useFonts } from "expo-font";
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({ navigation }) => {
   const [focusedInput, setFocusedInput] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -51,6 +51,8 @@ const RegistrationScreen = () => {
       setLogin("");
       setEmail("");
       setPassword("");
+
+      navigation.navigate("Home");
     }
   };
 
@@ -162,7 +164,9 @@ const RegistrationScreen = () => {
               <View style={styles.redirection}>
                 <Text style={styles.redirectionText}>Вже є акаунт?</Text>
                 <TouchableOpacity>
-                  <Text style={styles.redirectionLink}>Увійти</Text>
+                  <Text style={styles.redirectionLink}
+                    onPress={() => navigation.navigate("Login")}>
+                    Увійти</Text>
                 </TouchableOpacity>
               </View>
             </View>

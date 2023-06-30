@@ -12,15 +12,13 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [focusedInput, setFocusedInput] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isEmailEntered, setIsEmailEntered] = useState(false);
-  const [isPasswordEntered, setIsPasswordEntered] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
@@ -41,6 +39,8 @@ const LoginScreen = () => {
 
       setEmail("");
       setPassword("");
+
+      navigation.navigate("Home");
     }
   };
 
@@ -50,12 +50,10 @@ const LoginScreen = () => {
         <ImageBackground
           source={require("../images/bg-img.jpg")}
           style={styles.imageBackground}
-          imageStyle={{
-            minHeight: 812,
-          }}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : null}
+            keyboardVerticalOffset={-100}
+            behavior="padding"
             style={styles.container}
           >
             <View style={styles.titleContainer}>
@@ -73,7 +71,6 @@ const LoginScreen = () => {
                 value={email}
                 onChangeText={(text) => {
                   setEmail(text);
-                  setIsEmailEntered(text.trim() !== "");
                   console.log("Email:", text);
                 }}
                 onFocus={() => setFocusedInput("email")}
@@ -91,10 +88,8 @@ const LoginScreen = () => {
                 name="password"
                 value={password}
                 secureTextEntry={!showPassword}
-                editable={isEmailEntered}
                 onChangeText={(text) => {
                   setPassword(text);
-                  setIsPasswordEntered(text !== "");
                   console.log("Password:", text);
                 }}
                 onFocus={() => setFocusedInput("password")}
@@ -120,7 +115,10 @@ const LoginScreen = () => {
               <View style={styles.redirection}>
                 <Text style={styles.redirectionText}>Немає акаунту?</Text>
                 <TouchableOpacity>
-                  <Text style={styles.redirectionLink}>Зареєструватися</Text>
+                  <Text style={styles.redirectionLink}
+                    onPress={() => navigation.navigate("Registration")}
+                  >
+                    Зареєструватися</Text>
                 </TouchableOpacity>
               </View>
             </View>
