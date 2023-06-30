@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import {StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import RegistrationScreen from './src/Screens/RegistrationScreen';
 import LoginScreen from './src/Screens/LoginScreen';
 import Home from './src/Screens/Home';

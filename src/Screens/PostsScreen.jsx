@@ -51,53 +51,23 @@ const PostsScreen = ({ navigation }) => {
             <View style={styles.postContent}>
               <Text style={styles.postTitle}>Ліс</Text>
               <View style={styles.postMeta}>
-                <View style={styles.postComments}>
+                 <TouchableOpacity style={styles.postComments} onPress={() => navigation.navigate("Comments")}>
                   <Image
                     style={styles.postIcon}
                     source={require("../images/comments-o.png")}
                   />
                   <Text style={styles.postCount}>0</Text>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.postLocationInfo}>
                   <Image
                     style={styles.postIcon}
                     source={require("../images/map.png")}
                   />
-                  <Text style={styles.postLocationAddress}>
-                    Ivano-Frankivs'k Region, Ukraine
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.post}>
-            <TouchableOpacity
-              style={styles.postImageLink}
-              onPress={() => navigation.navigate("Home")}
-            >
-              <Image
-                style={styles.postImage}
-                source={require("../images/sunset.jpg")}
-              />
-            </TouchableOpacity>
-            <View style={styles.postContent}>
-              <Text style={styles.postTitle}>Ліс</Text>
-              <View style={styles.postMeta}>
-                <View style={styles.postComments}>
-                  <Image
-                    style={styles.postIcon}
-                    source={require("../images/comments-o.png")}
-                  />
-                  <Text style={styles.postCount}>0</Text>
-                </View>
-                <View style={styles.postLocationInfo}>
-                  <Image
-                    style={styles.postIcon}
-                    source={require("../images/map.png")}
-                  />
-                  <Text style={styles.postLocationAddress}>
-                    Ivano-Frankivs'k Region, Ukraine
-                  </Text>
+                  <TouchableOpacity onPress={() => navigation.navigate("Map")}>
+                    <Text style={styles.postLocationAddress}>
+                      Ivano-Frankivs'k Region, Ukraine
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -175,7 +145,13 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   scrollContent: {
+    position: "absolute",
+    top: 0,
+    left: 0,
     padding: 16,
+    width: "100%",
+    height: "100%",
+    overflow: "scroll",
   },
   post: {
     marginBottom: 32,

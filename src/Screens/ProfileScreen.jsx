@@ -59,7 +59,7 @@ const ProfileScreen = ({ navigation }) => {
               <Text style={styles.nameTitle}>Natali Romanova</Text>
             </View>
             <View style={styles.posts}>
-              <ScrollView>
+              <ScrollView contentContainerStyle={styles.scrollContent}>
                 <View style={styles.post}>
                   <TouchableOpacity
                     style={styles.postImageLink}
@@ -73,13 +73,13 @@ const ProfileScreen = ({ navigation }) => {
                   <View style={styles.postContent}>
                     <Text style={styles.postTitle}>Ліс</Text>
                     <View style={styles.postMeta}>
-                      <View style={styles.postComments}>
+                      <TouchableOpacity style={styles.postComments} onPress={() => navigation.navigate("Comments")}>
                         <Image
                           style={styles.postIcon}
                           source={require("../images/comments.png")}
                         />
                         <Text style={styles.postCount}>8</Text>
-                      </View>
+                      </TouchableOpacity>
                       <View style={styles.postLikes}>
                         <Image
                           style={styles.postIcon}
@@ -92,155 +92,9 @@ const ProfileScreen = ({ navigation }) => {
                           style={styles.postIcon}
                           source={require("../images/map.png")}
                         />
+                        <TouchableOpacity onPress={() => navigation.navigate("Map")}>
                         <Text style={styles.postLocationAddress}>Ukraine</Text>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.post}>
-                  <TouchableOpacity
-                    style={styles.postImageLink}
-                    onPress={() => navigation.navigate("Home")}
-                  >
-                    <Image
-                      style={styles.postImage}
-                      source={require("../images/sunset.jpg")}
-                    />
-                  </TouchableOpacity>
-                  <View style={styles.postContent}>
-                    <Text style={styles.postTitle}>Ліс</Text>
-                    <View style={styles.postMeta}>
-                      <View style={styles.postComments}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/comments.png")}
-                        />
-                        <Text style={styles.postCount}>8</Text>
-                      </View>
-                      <View style={styles.postLikes}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/like.png")}
-                        />
-                        <Text style={styles.postCount}>200</Text>
-                      </View>
-                      <View style={styles.postLocationInfo}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/map.png")}
-                        />
-                        <Text style={styles.postLocationAddress}>Ukraine</Text>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.post}>
-                  <TouchableOpacity
-                    style={styles.postImageLink}
-                    onPress={() => navigation.navigate("Home")}
-                  >
-                    <Image
-                      style={styles.postImage}
-                      source={require("../images/sunset.jpg")}
-                    />
-                  </TouchableOpacity>
-                  <View style={styles.postContent}>
-                    <Text style={styles.postTitle}>Ліс</Text>
-                    <View style={styles.postMeta}>
-                      <View style={styles.postComments}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/comments.png")}
-                        />
-                        <Text style={styles.postCount}>8</Text>
-                      </View>
-                      <View style={styles.postLikes}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/like.png")}
-                        />
-                        <Text style={styles.postCount}>200</Text>
-                      </View>
-                      <View style={styles.postLocationInfo}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/map.png")}
-                        />
-                        <Text style={styles.postLocationAddress}>Ukraine</Text>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.post}>
-                  <TouchableOpacity
-                    style={styles.postImageLink}
-                    onPress={() => navigation.navigate("Home")}
-                  >
-                    <Image
-                      style={styles.postImage}
-                      source={require("../images/sunset.jpg")}
-                    />
-                  </TouchableOpacity>
-                  <View style={styles.postContent}>
-                    <Text style={styles.postTitle}>Ліс</Text>
-                    <View style={styles.postMeta}>
-                      <View style={styles.postComments}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/comments.png")}
-                        />
-                        <Text style={styles.postCount}>8</Text>
-                      </View>
-                      <View style={styles.postLikes}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/like.png")}
-                        />
-                        <Text style={styles.postCount}>200</Text>
-                      </View>
-                      <View style={styles.postLocationInfo}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/map.png")}
-                        />
-                        <Text style={styles.postLocationAddress}>Ukraine</Text>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.post}>
-                  <TouchableOpacity
-                    style={styles.postImageLink}
-                    onPress={() => navigation.navigate("Home")}
-                  >
-                    <Image
-                      style={styles.postImage}
-                      source={require("../images/sunset.jpg")}
-                    />
-                  </TouchableOpacity>
-                  <View style={styles.postContent}>
-                    <Text style={styles.postTitle}>Ліс</Text>
-                    <View style={styles.postMeta}>
-                      <View style={styles.postComments}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/comments.png")}
-                        />
-                        <Text style={styles.postCount}>8</Text>
-                      </View>
-                      <View style={styles.postLikes}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/like.png")}
-                        />
-                        <Text style={styles.postCount}>200</Text>
-                      </View>
-                      <View style={styles.postLocationInfo}>
-                        <Image
-                          style={styles.postIcon}
-                          source={require("../images/map.png")}
-                        />
-                        <Text style={styles.postLocationAddress}>Ukraine</Text>
+                        </TouchableOpacity>
                       </View>
                     </View>
                   </View>
@@ -324,6 +178,14 @@ const styles = StyleSheet.create({
   posts: {
     flex: 1,
     position: "relative",
+    },
+  scrollContent: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    overflow: "scroll",
   },
   post: {
     marginBottom: 32,
